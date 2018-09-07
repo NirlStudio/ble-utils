@@ -1,6 +1,6 @@
 {
   "name": "ble-utils",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Parse and generate Bluetooth Low Energy peripheral advertising packets and other utilization helpers",
   "keywords": [
     "bluetooth",
