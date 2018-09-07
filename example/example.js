@@ -1,23 +1,25 @@
-// Copyright 2014 Technical Machine, Inc. See the COPYRIGHT
-// file at the top-level directory of this distribution.
-//
-// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
-// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
-// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
-// option. This file may not be copied, modified, or distributed
-// except according to those terms.
-
+/**
+ * Copyright 2018 Nirl Studio, V-Lab. 
+ * Licensed under the MIT license <http://opensource.org/licenses/MIT>.
+ */
+var Buffer = Buffer || require('buffer/').Buffer;
 var parser = require('../');
 
-var payload = new Buffer([21, 2, 1, 6, 17, 7, 102, 154, 12, 32, 0, 8, 31, 152, 227, 17, 197, 108, 160, 199, 200, 8]);
+var payload = new Buffer([
+  2, 1, 6,
+  17, 7, 102, 154, 12, 32, 0, 8, 31, 152, 227, 17, 197, 108, 160, 199, 200, 8
+]);
 
-// Parse (little-endian by default)
+// Parse (big-endian by default)
 var packets = parser.parse(payload);
 
+console.log('packets: 2?', packets.length);
 
-console.log(packets.length); // 3
-console.log(packets[0].type); // Flags
-console.log(packets[0].data); //  [ 'LE General Discoverable Mode', 'BR/EDR Not Supported' ]
+console.log('Flags?', packets[0].type); 
+console.log('[ "LE General Discoverable Mode", "BR/EDR Not Supported" ]?')
+console.log(packets[0].data);
 
-console.log(packets[1].type); // 'Incomplete List of 128-bit Service Class UUIDs'
-console.log(packets[1].data); // [ '0xadab58386e7d4601bda2bffaa68956ba' ]
+console.log('Complete List of 128-bit Service Class UUIDs?');
+console.log(packets[1].type);
+console.log('[ \'08c8c7a06cc511e3981f0800200c9a66\' ]?')
+console.log(packets[1].data);

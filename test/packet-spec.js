@@ -1,20 +1,18 @@
-// Copyright 2014 Technical Machine, Inc. See the COPYRIGHT
-// file at the top-level directory of this distribution.
-//
-// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
-// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
-// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
-// option. This file may not be copied, modified, or distributed
-// except according to those terms.
-
+/**
+ * Copyright 2018 Nirl Studio, V-Lab.
+ * Licensed under the MIT license <http://opensource.org/licenses/MIT>.
+ */
+var Buffer = Buffer || require('buffer/').Buffer;
 var expect = require('chai').expect;
+
+var types = require('../lib/types');
 var packet = require('../lib/packet');
+
 var Packet = packet.Packet;
-var toOctetStringArray = packet.toOctetStringArray;
+var toOctetStringArray = types._toOctetStringArray;
 
 describe("Packet", function() {
   describe("#new Packet()", function() {
-
     var types = [0x1, 0x5, 0xa, 0x1f, 0x21, 0x3d];
 
     it("should create a new packet with the correct data type", function() {

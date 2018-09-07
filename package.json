@@ -1,26 +1,36 @@
 {
-  "name" : "bleadvertise",
-  "version": "0.1.1",
-  "description" : "Parse and generate Bluetooth Low Energy peripheral advertising packets",
-  "keywords" : ["bluetooth", "low", "energy", "packet", "advertise", "parse", "generate"],
-  "main" : "index.js",
+  "name": "ble-utils",
+  "version": "0.2.1",
+  "description": "Parse and generate Bluetooth Low Energy peripheral advertising packets and other utilization helpers",
+  "keywords": [
+    "bluetooth",
+    "low",
+    "energy",
+    "packet",
+    "advertise",
+    "parse",
+    "generate"
+  ],
+  "author": "Leevi Li <leevi@nirlstudio.com>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/technicalmachine/bleadvertise.git"
+    "url": "https://github.com/NirlStudio/ble-utils.git"
   },
-  "devDependencies" :
-  {
-    "mocha" : "*",
-    "chai" : "*"
-  },
-  "author": "Technical Machine <team@technical.io>",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/technicalmachine/bleadvertise/issues"
+    "url": "https://github.com/NirlStudio/ble-utils/issues"
   },
-  "readmeFilename": "README.md",
   "directories": {
     "lib": "libraries",
-    "test" : "Testing"
+    "test": "Testing"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^5.2.0"
+  },
+  "dependencies": {
+    "buffer": "^5.2.1"
   }
 }

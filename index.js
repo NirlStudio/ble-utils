@@ -7,13 +7,17 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-var PacketParser = require('./lib/parser');
-var PacketBuilder = require('./lib/serializer');
+var types = require('./lib/types');
+var companies = require('./lib/companies');
 
-module.exports.parse = PacketParser.parse;
-module.exports.parseLE = PacketParser.parseLE;
-module.exports.parseBE = PacketParser.parseBE;
-module.exports.serialize = PacketBuilder.serialize;
+var parser = require('./lib/parser');
+var serializer = require('./lib/serializer');
 
-// For testing only
-module.exports.split = PacketParser.split;
+module.exports = {
+  types: types,
+  companies: companies,
+  advertising: {
+    parse: parser.parse,
+    serialize: serializer.serialize
+  }
+};

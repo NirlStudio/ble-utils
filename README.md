@@ -4,7 +4,7 @@
 This package can parse BLE slave advertisement packets into human readable/manipulatable objects and build advertisement packets from JSON objects. Based off of the BLE specification [data types](https://www.bluetooth.org/en-us/specification/assigned-numbers/generic-access-profile).
 ## Install
 ```
-npm install bleadvertise
+npm install ble-utils
 ```
 
 ## Usage
@@ -12,18 +12,21 @@ npm install bleadvertise
 ### Packet Parsing
 
 ```.js
-var parser = require('bleadvertise');
+var advertising = require('ble-utils').advertising;
 
 // Payload from your BLE device (make it into a buffer, if not already)
+var payload = new Buffer([
+  2, 1, 6,
+  17, 6, 186, 86, 137, 166, 250, 191, 162, 189, 1, 70, 125, 110, 56, 88, 171, 173,
+  5, 22, 10, 24, 7, 4
+]);
 
-var payload = new Buffer([27, 2, 1, 6, 17, 6, 186, 86, 137, 166, 250, 191, 162, 189, 1, 70, 125, 110, 56, 88, 171, 173, 5, 22, 10, 24, 7, 4]);
-
-// Parse (little-endian by default)
-var packets = parser.parse(payload);
+// Parse (big-endian by default)
+var packets = advertising.parse(payload);
 
 console.log(packets.length); // 3
 console.log(packets[0].type); // Flags
-console.log(packets[0].data); //  [ 'LE Limited Discoverable Mode' ]
+console.log(packets[0].data); // [ 'LE Limited Discoverable Mode' ]
 
 console.log(packets[1].type); // 'Incomplete List of 128-bit Service Class UUIDs'
 console.log(packets[1].data); // [ '0xba5689a6fabfa2bd01467d6e3858abad' ]
@@ -36,21 +39,23 @@ The returned packets in the packet array have the following structure:
 
 *packet*.data -> The data parsed into appropriate data type (eg. String, Array of Octet Strings, unsigned int, etc.)
 
-*packet*.typeFlag -> the type flag parsed from packet
+*packet*._type -> the type value parsed from packet
 
-*packet*.raw -> The raw buffer that was parsed
+*packet*._data -> The raw buffer that was parsed
+
+*packet*._byteOrder -> The byte order in parsing
 
 ### Endianness
 
 You can specify the endianess that you want the buffers parsed with by using these functions:
 ```.js
-parser.parseLE(buffer);
-parse.parseBE(buffer);
+advertising.parse.LE(buffer);
+advertising.parse.BE(buffer);
 ```
 
 ### Building Packets
 ```.js
-var parser = require('bleadvertise');
+var advertising = require('ble-utils').advertising;
 
 // Create your advertisement packet
 var packet = {
@@ -60,7 +65,7 @@ var packet = {
 };
 
 // Serialize it into a Buffer
-var payload = parser.serialize(packet);
+var payload = advertising.serialize(packet);
 
 console.log(payload);
 // <Buffer 02 01 06 05 02 00 2a 01 2a 0a 09 4d 79 20 44 65 76 69 63 65>
